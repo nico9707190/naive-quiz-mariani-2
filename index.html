@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/index.css">
+    <title>Naive Quiz</title>
+</head>
+<body>
+    <div class="container">
+        <h2 id="questionNumber"></h2><h2 id="questionText"></h2>
+        <form action="">
+            <input type="text" name="answer" placeholder="Inserisci Risposta">
+            <input type="submit" name="invio" value="Rispondi">
+        </form>
+        <h2 id="punteggio">Punteggio <span id="score">0</span></h2>
+    </div>
+    <script>
+        function sanitize(rispostautente){
+            return rispostautente.toLowerCase();
+        }
+        let quiz = [
+            {
+                "ndomanda" : "1",
+                "testo" : "Che azienda ha come logo la mela mozzicata?",
+                "rispostagiusta" : "apple",
+                "rispostautente" : "",
+            },
+            {
+                "ndomanda" : "2",
+                "testo" : "qual è il capoluogo di regione della Calabria?",
+                "rispostagiusta" : "catanzaro",
+                "rispostautente" : "",
+            },
+            {
+                "ndomanda" : "3",
+                "testo" : "Qual è stata la seconda capitale dell'Italia?",
+                "rispostagiusta" : "torino",
+                "rispostautente" : "",
+            },
+            {
+                "ndomanda" : "4",
+                "testo" : "Che lingua si parla in Canadese, oltre all'Inglese?",
+                "rispostagiusta" : "francese",
+                "rispostautente" : "",
+            },
+            {
+                "ndomanda" : "5",
+                "testo" : "In che continente si trova il Burundi?",
+                "rispostagiusta" : "africa",
+                "rispostautente" : "",
+            },
+        ]
+
+        let currentQuestion = 0;
+        let i = 0;
+        let punteggio = document.querySelector("#score")
+        let ndomanda = document.querySelector("#questionNumber");
+        let domanda = document.querySelector("#questionText");
+        let form = document.querySelector("form")
+
+        function spawn(i){
+            domanda.innerHTML = quiz[i].testo
+            form.addEventListener("submit", fdomanda)
+        }
+
+        function fdomanda(e){
+            e.preventDefault()
+            quiz[i].rispostautente = document.querySelector("[name=answer]").value
+            quiz[i].rispostautente = sanitize(quiz[i].rispostautente)
+            if(quiz[i].rispostautente===quiz[i].rispostagiusta){
+                score = score + 1;
+                ndomanda.innerHTML = i + 1;
+                punteggio.innerHTML = score;
+            }else{
+                ndomanda.innerHTML = i + 1;
+            }
+            if (i<4){
+                i++
+                ndomanda.innerHTML = i + 1
+                domanda.innerHTML = quiz[i].testo
+                spawn(i)
+            }    
+        }
+
+        window.addEventListener("load", function(){
+            let score = 0;
+            punteggio.innerHTML = score;
+            spawn(i)
+        });
+    </script>
+</body>
+</html>
