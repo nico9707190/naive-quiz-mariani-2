@@ -9,10 +9,12 @@
 <body>
     <div class="container">
         <h2 id="questionNumber"></h2><h2 id="questionText"></h2>
-        <form action="">
-            <input type="text" name="answer" placeholder="Inserisci Risposta">
-            <input type="submit" name="invio" value="Rispondi">
-        </form>
+        <div class="aa">
+            <form action="">
+                <input type="text" name="answer" placeholder="Inserisci Risposta">
+                <input type="submit" name="invio" value="Rispondi">
+            </form>
+        </div>
         <h2 id="punteggio">Punteggio <span id="score">0</span></h2>
     </div>
     <script>
@@ -53,6 +55,7 @@
         ]
 
         let currentQuestion = 0;
+        let score = 0;
         let i = 0;
         let punteggio = document.querySelector("#score")
         let ndomanda = document.querySelector("#questionNumber");
@@ -75,16 +78,20 @@
             }else{
                 ndomanda.innerHTML = i + 1;
             }
-            if (i<4){
+            if (i<quiz.length){
                 i++
                 ndomanda.innerHTML = i + 1
                 domanda.innerHTML = quiz[i].testo
                 spawn(i)
-            }    
+            }else{
+                form.classList.add("hidden")
+                h2.classList.add("hidden")
+                let fine = document.querySelector("#punteggio")
+                fine.innerHTML = "Hai finito il quiz! Il tuo punteggio è:"
+            }
         }
 
         window.addEventListener("load", function(){
-            let score = 0;
             punteggio.innerHTML = score;
             spawn(i)
         });
