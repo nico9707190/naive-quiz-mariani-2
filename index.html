@@ -8,16 +8,22 @@
 </head>
 <body>
     <div class="container">
-        <h2 id="questionNumber"></h2><h2 id="questionText"></h2>
+        <div class="titolo">
+            <h2 id="questionNumber"></h2><h2 id="questionText"></h2>
+        </div>
         <div class="aa">
             <form action="">
                 <input type="text" name="answer" placeholder="Inserisci Risposta">
                 <input type="submit" name="invio" value="Rispondi">
             </form>
         </div>
-        <h2 id="punteggio">Punteggio <span id="score">0</span></h2>
+        <br>
+        <div class="sotto">
+            <h2 id="punteggio">Punteggio <span id="score">0</span></h2>
+        </div>
     </div>
     <script>
+        let inputvalue = document.querySelector("[name=answer]").value
         function sanitize(rispostautente){
             return rispostautente.toLowerCase();
         }
@@ -42,7 +48,7 @@
             },
             {
                 "ndomanda" : "4",
-                "testo" : "Che lingua si parla in Canadese, oltre all'Inglese?",
+                "testo" : "Che lingua si parla in Canada, oltre all'Inglese?",
                 "rispostagiusta" : "francese",
                 "rispostautente" : "",
             },
@@ -69,8 +75,8 @@
 
         function fdomanda(e){
             e.preventDefault()
-            quiz[i].rispostautente = document.querySelector("[name=answer]").value
-            quiz[i].rispostautente = sanitize(quiz[i].rispostautente)
+            quiz[i].rispostautente = document.querySelector("[name=answer]")
+            quiz[i].rispostautente = sanitize(quiz[i].rispostautente.value)
             if(quiz[i].rispostautente===quiz[i].rispostagiusta){
                 score = score + 1;
                 ndomanda.innerHTML = i + 1;
@@ -78,10 +84,11 @@
             }else{
                 ndomanda.innerHTML = i + 1;
             }
-            if (i<quiz.length){
+            if (i < 5){
                 i++
                 ndomanda.innerHTML = i + 1
                 domanda.innerHTML = quiz[i].testo
+                inputvalue = "" ;
                 spawn(i)
             }else{
                 form.classList.add("hidden")
@@ -89,6 +96,7 @@
                 let fine = document.querySelector("#punteggio")
                 fine.innerHTML = "Hai finito il quiz! Il tuo punteggio è:"
             }
+
         }
 
         window.addEventListener("load", function(){

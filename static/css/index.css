@@ -2,9 +2,31 @@
     visibility: hidden;
 }
 
+body {
+    background-color: green;
+}
+
 .container{
-    display: flex;
-    position: relative;
     justify-content: center;
     align-items: center;
+}
+
+.titolo{
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 25px;
+    color:black;
+    width: 100%;
+}
+
+.aa{
+    display: flex;
+    justify-content: center;
+}
+
+.sotto{
+    display: flex;
+    justify-content: center;
 }
